@@ -5,7 +5,7 @@ class GuessMyNumberGame
     static void Main()
     {
         Random random = new Random();
-        int magicNumber = random.Next(1, 101); // Generates a random number between 1 and 100
+        int magicNumber = random.Next(1, 101);
         int guess = -1;
 
         while (guess != magicNumber)
