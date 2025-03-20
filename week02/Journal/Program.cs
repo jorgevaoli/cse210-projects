@@ -1,9 +1,13 @@
 using System;
 
-class Program
+namespace JournalApp
 {
-    static void Main(string[] args)
+    class Program
     {
-        Console.WriteLine("Hello World! This is the Journal Project.");
+        static void Main(string[] args)
+        {
+            // In the future, I will add code here for user interaction.
+            Console.WriteLine("Journal Program - Stub Version");
+        }
     }
 }
