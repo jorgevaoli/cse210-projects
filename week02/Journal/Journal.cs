@@ -1,40 +1,62 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 
-namespace JournalApp
+class Journal
 {
-    public class Journal
+    private List<Entry> _entries = new List<Entry>();
+
+    public void AddEntry(Entry entry)
     {
-        private List<Entry> _entries;
+        _entries.Add(entry);
+    }
 
-        public Journal()
+    public void DisplayEntries()
+    {
+        if (_entries.Count == 0)
         {
-            _entries = new List<Entry>();
+            Console.WriteLine("No journal entries found.");
+            return;
         }
 
-        public void AddEntry(Entry newEntry)
+        foreach (Entry entry in _entries)
         {
-            // Stub: Add entry
-            _entries.Add(newEntry);
+            entry.Display();
         }
+    }
 
-        public void DisplayAll()
+    public void SaveToFile(string filename)
+    {
+        using (StreamWriter outputFile = new StreamWriter(filename))
         {
-            // Stub: Display entry
             foreach (Entry entry in _entries)
             {
-                entry.Display();
+                outputFile.WriteLine($"{entry.Date}|{entry.Prompt}|{entry.Response}|{entry.Mood}");
             }
         }
+        Console.WriteLine("Journal saved successfully.");
+    }
 
-        public void SaveToFile(string file)
+    public void LoadFromFile(string filename)
+    {
+        if (!File.Exists(filename))
         {
-            // Stub: Save entries
+            Console.WriteLine("File not found.");
+            return;
         }
 
-        public void LoadFromFile(string file)
+        _entries.Clear();
+        string[] lines = File.ReadAllLines(filename);
+
+        foreach (string line in lines)
         {
-            // Stub: Load entries
+            string[] parts = line.Split('|');
+            if (parts.Length == 4)
+            {
+                Entry entry = new Entry(parts[0], parts[1], parts[2], parts[3]);
+                _entries.Add(entry);
+            }
         }
+        Console.WriteLine("Journal loaded successfully.");
     }
 }
