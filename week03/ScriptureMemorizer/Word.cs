@@ -1,15 +1,28 @@
-namespace ScriptureMemorizer
+using System;
+
+public class Word
 {
-    public class Word
+    private string text;
+    private bool isHidden;
+
+    public Word(string text)
     {
-        private string _text;
-        private bool _isHidden;
+        this.text = text;
+        isHidden = false;
+    }
 
-        public Word(string text) { }
+    public void Hide()
+    {
+        isHidden = true;
+    }
 
-        public void Hide() { }
-        public void Show() { }
-        public bool IsHidden() { return false; }
-        public string GetDisplayText() { return ""; }
+    public bool IsHidden()
+    {
+        return isHidden;
+    }
+
+    public string GetDisplayText()
+    {
+        return isHidden ? new string('_', text.Length) : text;
     }
 }
