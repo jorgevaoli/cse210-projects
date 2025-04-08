@@ -48,3 +48,4 @@ namespace MindfulnessProgram
         }
     }
 }
+// Exceeding Requirements: Saving a log file and adding more meaningful animation for the breathing.
